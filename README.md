@@ -20,6 +20,7 @@ env:
   K8S_DEPLOYMENT: dev_deployment
   AWS_REGION: ap-northeast-2
   EKS_CLUSTER_NAME: dev_cluster
+  EKS_ROLE_ARN: arn:aws:iam::XXXXXXXXXXXX:role/testrole
 
 jobs:
   deploy:
@@ -34,6 +35,7 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: $AWS_REGION
           cluster_name: $EKS_CLUSTER_NAME
+          role_arn: $EKS_ROLE_ARN
         with:
           args: |
             kubectl set image deployment $K8S_DEPLOYMENT -n $K8S_NAMESPACE
